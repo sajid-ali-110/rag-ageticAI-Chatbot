@@ -1,6 +1,5 @@
 import { config } from "../../config/app.config.js";
 import { embeddings } from "./embedding.provider.js";
-//import { getPineconeIndex } from "./pinecone.client.js";
 import { getPineconeIndex } from "./pinecone.client.js";
 
 export async function upsertChunks({ documentId, docName, chunks }) {

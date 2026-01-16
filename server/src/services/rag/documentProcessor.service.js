@@ -2,8 +2,11 @@ import fs from "fs/promises";
 import { v4 as uuidv4 } from "uuid";
 import { upsertChunks } from "./vectorStore.service.js";
 import * as pdfjsLib from "pdfjs-dist/legacy/build/pdf.mjs";
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const pdfParse = require("pdf-parse");
 
-function chunkText(text, chunkSize = 1200, overlap = 200) {
+function chunkText(text, chunkSize = 1500, overlap = 250) {
   const clean = String(text || "")
     .replace(/\r/g, "")
     .replace(/[ \t]+\n/g, "\n")
@@ -49,9 +52,7 @@ async function extractTextFromPdf(filePath) {
   return fullText;
 }
 
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const pdfParse = require("pdf-parse");
+
 
 export async function extractTextFromUpload({ filePath, mimeType }) {
   const isPdf =
